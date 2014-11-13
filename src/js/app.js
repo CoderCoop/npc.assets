@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: 'app',
+    baseUrl: 'js',
 });
 
 require(["main"]);

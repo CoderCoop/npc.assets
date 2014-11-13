@@ -1,11 +1,24 @@
 {
-  "name": "my-project-name",
-  "version": "0.1.0",
+  "name": "bower_example",
+  "version": "0.0.0",
+  "description": "An example of a bower project",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gist.github.com/7369801.git"
+  },
+  "author": "Chase Adams",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://gist.github.com/7369801"
+  },
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-jquerybuilder": "~0.1.4"
+    "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.5",
+    "grunt-contrib-cssmin": "~0.10.0"
   }
 }

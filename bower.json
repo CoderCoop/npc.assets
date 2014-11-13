@@ -19,10 +19,8 @@
     "tests"
   ],
   "dependencies": {
-    "jquery-mobile": "1.4.5"
-  },
-  "install" : {
-    "path" : "src"
+    "jquery-mobile": "1.4.5",
+    "requirejs": "~2.1.9"
   }
   
 }
