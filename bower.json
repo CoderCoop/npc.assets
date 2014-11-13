@@ -1,0 +1,28 @@
+{
+  "name": "myproject",
+  "version": "0.0.1",
+  "homepage": "https://github.com/CoderCoop/nativePlantsChesapeake",
+  "authors": [
+    "Mike Chelen <michael.chelen@gmail.com>"
+  ],
+  "description": "something",
+  "keywords": [
+    "foo"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-mobile": "1.4.5"
+  },
+  "install" : {
+    "path" : "src"
+  }
+  
+}
