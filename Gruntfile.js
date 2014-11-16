@@ -30,7 +30,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/jquery.js',
+          '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
           '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquerymobile.js',
           '<%= config.dist %>/js/require.js': '<%= bower.directory %>/requirejs/require.js',
           '<%= config.dist %>/js/main.js': '<%= config.app %>/js/main.js',
@@ -45,14 +45,31 @@ module.exports = function (grunt) {
           '<%= config.dist %>/css/styles.css': ['<%= config.app %>/css/*.css']
         }
       }
+    },
+    curl: {
+      '<%= bower.directory %>/dl/jquery.mobile.zip': 'http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip'
+    },
+    unzip: {
+      '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/dl/jquery.mobile.zip'
+    },
+    bower: {
+      install: {
+       //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-curl');
+  grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-bower-task');
 
   grunt.registerTask('default', [
+    'bower',
+    'curl',
+    'unzip',
     'copy',
     'cssmin',
     'uglify'
