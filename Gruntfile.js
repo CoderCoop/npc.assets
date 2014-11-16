@@ -20,6 +20,18 @@ module.exports = function (grunt) {
          cwd: '<%= config.app %>',
          src: '*.html',
          dest: '<%= config.dist %>'
+       },
+       {
+         expand: true,
+         cwd: '<%= bower.directory %>/jquery-mobile',
+         src: '*.min.css*',
+         dest: '<%= config.dist %>/css/'
+       },
+       {
+         expand: true,
+         cwd: '<%= bower.directory %>/jquery-mobile/images',
+         src: '*',
+         dest: '<%= config.dist %>/css/images/'
        }]
       }
     },
@@ -31,8 +43,8 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
-//          '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquerymobile.js',
           '<%= config.dist %>/js/require.js': '<%= bower.directory %>/requirejs/require.js',
+          '<%= config.dist %>/js/jquery.mobile-1.4.5.min.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
           '<%= config.dist %>/js/main.js': '<%= config.app %>/js/main.js',
           '<%= config.dist %>/js/app.js': '<%= config.app %>/js/app.js',
           '<%= config.dist %>/js/npc.js': '<%= config.app %>/js/npc.js'
@@ -47,10 +59,13 @@ module.exports = function (grunt) {
       }
     },
     curl: {
-      '<%= bower.directory %>/dl/jquery.mobile.zip': 'http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip'
+      jqm: {
+        dest: "<%= bower.directory %>/tmp/jquery.mobile.zip",
+        src: "http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip"
+      }
     },
     unzip: {
-      '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/dl/jquery.mobile.zip'
+      '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/tmp/jquery.mobile.zip'
     }
   });
 
@@ -59,18 +74,22 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-curl');
   grunt.loadNpmTasks('grunt-zip');
+  grunt.loadNpmTasks('grunt-if-missing');
 
   grunt.registerTask('default', [
-    'curl',
+    'if-missing:curl:jqm',
     'unzip',
     'copy',
     'cssmin',
     'uglify'
   ]);
   
-  grunt.registerTask('test', [
-    'curl',
-    'unzip'
+  grunt.registerTask('build', [
+    'curl:jqm',
+    'unzip',
+    'copy',
+    'cssmin',
+    'uglify'
   ]);
   
 };
