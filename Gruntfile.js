@@ -47,15 +47,10 @@ module.exports = function (grunt) {
       }
     },
     curl: {
-      './lib/dl/jquery.mobile.zip': 'http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip'
+      '<%= bower.directory %>/dl/jquery.mobile.zip': 'http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip'
     },
     unzip: {
-      './lib/jquery-mobile/': './lib/dl/jquery.mobile.zip'
-    },
-    bower: {
-      install: {
-       //just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
-      }
+      '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/dl/jquery.mobile.zip'
     }
   });
 
@@ -64,10 +59,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-curl');
   grunt.loadNpmTasks('grunt-zip');
-  grunt.loadNpmTasks('grunt-bower-task');
 
   grunt.registerTask('default', [
-    'bower',
     'curl',
     'unzip',
     'copy',

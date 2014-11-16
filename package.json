@@ -22,7 +22,6 @@
     "grunt-contrib-cssmin": "~0.10.0",
     "grunt-curl": "~2.0.3",
     "grunt-if-missing": "~1.0.0",
-    "grunt-zip": "~0.16.2",
-    "grunt-bower-task": "~0.4.0"
+    "grunt-zip": "~0.16.2"
   }
 }
