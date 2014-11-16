@@ -44,7 +44,7 @@ module.exports = function (grunt) {
         files: {
           '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
           '<%= config.dist %>/js/require.js': '<%= bower.directory %>/requirejs/require.js',
-          '<%= config.dist %>/js/jquery.mobile-1.4.5.min.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
+          '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
           '<%= config.dist %>/js/main.js': '<%= config.app %>/js/main.js',
           '<%= config.dist %>/js/app.js': '<%= config.app %>/js/app.js',
           '<%= config.dist %>/js/npc.js': '<%= config.app %>/js/npc.js'
