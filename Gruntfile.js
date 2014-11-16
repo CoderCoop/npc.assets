@@ -31,7 +31,7 @@ module.exports = function (grunt) {
       dist: {
         files: {
           '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
-          '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquerymobile.js',
+//          '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquerymobile.js',
           '<%= config.dist %>/js/require.js': '<%= bower.directory %>/requirejs/require.js',
           '<%= config.dist %>/js/main.js': '<%= config.app %>/js/main.js',
           '<%= config.dist %>/js/app.js': '<%= config.app %>/js/app.js',
@@ -47,10 +47,10 @@ module.exports = function (grunt) {
       }
     },
     curl: {
-      '<%= bower.directory %>/dl/jquery.mobile.zip': 'http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip'
+      './lib/dl/jquery.mobile.zip': 'http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip'
     },
     unzip: {
-      '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/dl/jquery.mobile.zip'
+      './lib/jquery-mobile/': './lib/dl/jquery.mobile.zip'
     },
     bower: {
       install: {
@@ -74,4 +74,10 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify'
   ]);
+  
+  grunt.registerTask('test', [
+    'curl',
+    'unzip'
+  ]);
+  
 };
