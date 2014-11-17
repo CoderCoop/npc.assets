@@ -37,24 +37,21 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> lib - v<%= pkg.version %> -' +
-          '<%= grunt.template.today("yyyy-mm-dd") %> */'
+        banner: '/*! grunt <%= grunt.template.today("yyyy-mm-dd") %> */'
       },
-      dist: {
+      lib: {
         files: [{
           '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
           '<%= config.dist %>/js/require.js': '<%= bower.directory %>/requirejs/require.js',
           '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
-/*          '<%= config.dist %>/js/main.js': '<%= config.app %>/js/main.js',
-          '<%= config.dist %>/js/app.js': '<%= config.app %>/js/app.js',
-          '<%= config.dist %>/js/npc.js': '<%= config.app %>/js/npc.js',
-          '<%= config.dist %>/js/foo.js': '<%= config.app %>/js/foo.js'*/
-        },
-        {
-            expand: true,
-            src: '**/*.js',
-            dest: '<%= config.dist %>/js',
-            cwd: '<%= config.app %>/js',
+        }]
+      },
+      app: {
+        files: [{
+          expand: true,
+          src: '*.js',
+          dest: '<%= config.dist %>/js',
+          cwd: '<%= config.app %>/js',
         }]
       }
     },
@@ -73,7 +70,16 @@ module.exports = function (grunt) {
     },
     unzip: {
       '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/tmp/jquery.mobile.zip'
-    }
+    },
+    watch: {
+      scripts: {
+        files: ['<%= config.app %>/js/*.js'],
+        tasks: ['uglify:app'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -82,6 +88,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-curl');
   grunt.loadNpmTasks('grunt-zip');
   grunt.loadNpmTasks('grunt-if-missing');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', [
     'if-missing:curl:jqm',
@@ -91,12 +98,18 @@ module.exports = function (grunt) {
     'uglify'
   ]);
   
-  grunt.registerTask('build', [
+  grunt.registerTask('buildclean', [
     'curl:jqm',
     'unzip',
     'copy',
     'cssmin',
     'uglify'
   ]);
+  
+  grunt.registerTask('buildapp', [
+    'uglify:app'
+  ]);
+
+  
   
 };

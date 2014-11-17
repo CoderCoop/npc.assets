@@ -1,6 +1,6 @@
 function processSearchData(data) {
 
-  var foodata = {}; //initialize array
+  var outputData = {}; //initialize array
 
   // handle case of search error
   if (typeof data.query === 'undefined') {
@@ -52,13 +52,13 @@ function processSearchData(data) {
     } 
     */     
 
-    // save entry into foodata array
-    foodata[plantid]=entry;
+    // save entry into outputData array
+    outputData[plantid]=entry;
   });
   
-//  console.log(JSON.stringify(foodata));
+//  console.log(JSON.stringify(outputData));
   
-  return foodata;
+  return outputData;
 }
 
 
@@ -108,5 +108,5 @@ function displaySearchResults(bardata) {
   // remove loading message
   $.mobile.loading( 'hide');
   });
-}
-  
+}  
+
