@@ -1,6 +1,6 @@
 function foo(data) {
 
-  var foodata = [];
+  var foodata = {};
 
   // handle case of search error
   if (typeof data.query === 'undefined') {
@@ -24,25 +24,24 @@ function foo(data) {
   //iterate through each result          
   $.each(data.query.results.div, function (i, div) {
     
-    // create array to hold result data
-    var entry = new Array();
-    
+    // create object to hold result data
     // assign values from json
-    entry["url"]=div.div[3].div.div[0].a.href; //plant url
-    entry["thumb"]=div.div[0].a.img.src; //thumbnail image
-    entry["img"]=entry["thumb"].replace("thumbs/",""); //full size image  
-    entry["species"]=div.div[1].a.content; //scientific name
-    entry["name"]=div.div[2].p; //common name  
-    entry["commonNames"]=div.div[3].div.div[1].p.content; // all common names
-    entry["plantTypes"]=div.div[3].div.div[2].p; // plant types
-    entry["sunExposure"]=div.div[3].div.div[3].p; // sun exposure
-    entry["soilTexture"]=div.div[3].div.div[4].p; // soil texture
-    entry["soilMoisture"]=div.div[3].div.div[5].p; // soil moisture
-    entry["region"]=div.div[3].div.div[6].p; // region
-    
+    var entry = {
+    "url" : div.div[3].div.div[0].a.href, //plant url
+    "thumb" : div.div[0].a.img.src; //thumbnail image
+    "img" : entry.thumb.replace("thumbs/",""); //full size image  
+    "species" : div.div[1].a.content; //scientific name
+    "name" : div.div[2].p; //common name  
+    "commonNames" : div.div[3].div.div[1].p.content; // all common names
+    "plantTypes" : div.div[3].div.div[2].p; // plant types
+    "sunExposure" : div.div[3].div.div[3].p; // sun exposure
+    "soilTexture" : div.div[3].div.div[4].p; // soil texture
+    "soilMoisture" : div.div[3].div.div[5].p; // soil moisture
+    "region" : div.div[3].div.div[6].p; // region
+    };    
     
     // extract numeric plant id from url
-    plantid = entry["url"].split("/").pop(); 
+    plantid = entry.url.split("/").pop(); 
     
     //remove leading punctuation
     for (var x in entry) {
@@ -51,8 +50,10 @@ function foo(data) {
     }      
 
     // save entry into mydata array
-    foodata[plantid]=entry;
+    foodata.plantid=entry;
   });
+  
+  console.log(foodata);
   
   return foodata;
 }
@@ -60,7 +61,11 @@ function foo(data) {
 
 function bar(bardata) {  
 
-  $.each(bardata.entry, function (entry) {
+  console.log(bardata);
+
+  $.each(bardata, function (i, entry) {
+
+  console.log(entry);
 
   //create li
   $listitem = $('<li>'); 
@@ -74,17 +79,17 @@ function bar(bardata) {
   }); 
   
   //create thumbnail image
-  $( "<img>").attr( "src", entry["thumb"] ).appendTo( $itemlink );
+  $( "<img>").attr( "src", entry.thumb ).appendTo( $itemlink );
   
   // create html element with species name
-  $('<h3>', {text:entry["species"]}).appendTo( $itemlink ); 
+  $('<h3>', {text:entry.species}).appendTo( $itemlink ); 
 
   // create html element with name
-  $('<p>', {text:entry["name"]+entry["commonNames"]}).appendTo( $itemlink );
+  $('<p>', {text:entry.name+entry.commonNames}).appendTo( $itemlink );
 
   // create html element plant type
   $('<p>', {
-    text:"Plant Type: "+entry["plantTypes"],
+    text:"Plant Type: "+entry.plantTypes,
     style:"font-style:italic"
   }).appendTo( $itemlink );
     
