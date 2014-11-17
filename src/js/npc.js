@@ -1,3 +1,5 @@
+require(["functions"]);
+
 
 $(document).ready(function () {   
 

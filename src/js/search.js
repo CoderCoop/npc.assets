@@ -14,8 +14,6 @@
     
     e.preventDefault(); // suppress form submit
     
-    mydata = new Array(); // initialize with new array
-   
     $('#mylist').empty(); // clear old results from dom
 
     // sync input between search bars from both jqm pages
@@ -43,7 +41,10 @@
     
     // runs when $.getJSON() completes 
     .done(function (data) {
-      require(["search-handle"]);
+      // process data into nice format
+      var mydata = foo(data);
+      // build html from data
+      bar(mydata);
     });
   });
 
