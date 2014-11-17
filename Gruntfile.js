@@ -98,7 +98,7 @@ module.exports = function (grunt) {
     'uglify'
   ]);
   
-  grunt.registerTask('buildclean', [
+  grunt.registerTask('build', [
     'curl:jqm',
     'unzip',
     'copy',
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
     'uglify'
   ]);
   
-  grunt.registerTask('buildapp', [
+  grunt.registerTask('app', [
     'uglify:app'
   ]);
 
