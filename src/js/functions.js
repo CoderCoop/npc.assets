@@ -27,27 +27,28 @@ function foo(data) {
     // create object to hold result data
     // assign values from json
     var entry = {
-    "url" : div.div[3].div.div[0].a.href, //plant url
-    "thumb" : div.div[0].a.img.src; //thumbnail image
-    "img" : entry.thumb.replace("thumbs/",""); //full size image  
-    "species" : div.div[1].a.content; //scientific name
-    "name" : div.div[2].p; //common name  
-    "commonNames" : div.div[3].div.div[1].p.content; // all common names
-    "plantTypes" : div.div[3].div.div[2].p; // plant types
-    "sunExposure" : div.div[3].div.div[3].p; // sun exposure
-    "soilTexture" : div.div[3].div.div[4].p; // soil texture
-    "soilMoisture" : div.div[3].div.div[5].p; // soil moisture
-    "region" : div.div[3].div.div[6].p; // region
-    };    
+      "url" : div.div[3].div.div[0].a.href, //plant url
+      "thumb" : div.div[0].a.img.src, //thumbnail image
+      "img" : div.div[0].a.img.src.replace("thumbs/",""), //full size image
+      "species" : div.div[1].a.content, //scientific name
+      "name" : div.div[2].p, //common name  
+      "commonNames" : div.div[3].div.div[1].p.content, // all common names
+      "plantTypes" : div.div[3].div.div[2].p, // plant types
+      "sunExposure" : div.div[3].div.div[3].p, // sun exposure
+      "soilTexture" : div.div[3].div.div[4].p, // soil texture
+      "soilMoisture" : div.div[3].div.div[5].p, // soil moisture
+      "region" : div.div[3].div.div[6].p, // region
+    };
     
     // extract numeric plant id from url
     plantid = entry.url.split("/").pop(); 
     
-    //remove leading punctuation
+    /*//remove leading punctuation TODO
     for (var x in entry) {
-      entry[x] = entry[x].replace(":  ","");
-      entry[x] = entry[x].replace(": ","");
-    }      
+      entry.x = entry.x.replace(":  ","");
+      entry.x = entry.x.replace(": ","");
+    } 
+    */     
 
     // save entry into mydata array
     foodata.plantid=entry;
