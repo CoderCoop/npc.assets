@@ -42,9 +42,9 @@
     // runs when $.getJSON() completes 
     .done(function (data) {
       // process data into nice format
-      var mydata = foo(data);
+      var mydata = processSearchData(data);
       // build html from data
-      bar(mydata);
+      displaySearchResults(mydata);
     });
   });
 

@@ -1,6 +1,6 @@
-function foo(data) {
+function processSearchData(data) {
 
-  var foodata = {};
+  var foodata = {}; //initialize array
 
   // handle case of search error
   if (typeof data.query === 'undefined') {
@@ -43,6 +43,8 @@ function foo(data) {
     // extract numeric plant id from url
     plantid = entry.url.split("/").pop(); 
     
+//    console.log(plantid);
+    
     /*//remove leading punctuation TODO
     for (var x in entry) {
       entry.x = entry.x.replace(":  ","");
@@ -50,23 +52,23 @@ function foo(data) {
     } 
     */     
 
-    // save entry into mydata array
-    foodata.plantid=entry;
+    // save entry into foodata array
+    foodata[plantid]=entry;
   });
   
-  console.log(foodata);
+//  console.log(JSON.stringify(foodata));
   
   return foodata;
 }
 
 
-function bar(bardata) {  
+function displaySearchResults(bardata) {  
 
-  console.log(bardata);
+//  console.log(bardata);
 
   $.each(bardata, function (i, entry) {
 
-  console.log(entry);
+//  console.log(entry);
 
   //create li
   $listitem = $('<li>'); 
