@@ -42,9 +42,12 @@
     // runs when $.getJSON() completes 
     .done(function (data) {
       // process data into nice format
-      var mydata = processSearchData(data);
+      mydata = processSearchData(data);
       // build html from data
-      displaySearchResults(mydata);
+      showSearchResults(mydata);
+      // remove loading message
+      $.mobile.loading( 'hide');
+      
     });
   });
 
