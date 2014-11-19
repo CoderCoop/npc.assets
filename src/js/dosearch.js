@@ -46,6 +46,11 @@ function doSearch (e){
       showSearchResults(mydata);
       // remove loading message
       $.mobile.loading( 'hide');
+
+      // catch click on search results to show detailed page
+      $(document).on('click', 'a.search-result', function() {
+        showResultDetail.call(this,mydata);
+      }); 
       
     });
 }
