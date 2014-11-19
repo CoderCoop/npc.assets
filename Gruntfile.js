@@ -82,7 +82,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ['<%= config.app %>/js/*.js'],
-        tasks: ['uglify:app'],
+        tasks: ['copy:debug'],
         options: {
           spawn: false,
         },
