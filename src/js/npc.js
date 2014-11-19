@@ -3,9 +3,10 @@ $(document).ready(function () {
 
   var mydata; // create array to hold result data
 
-  require(["functions"]);
-  require(["search"]);
-
+  require(["dosearch"]);
+  require(["processdata"]);
+  require(["showsearch"]);
+  require(["showresult"]);
 
   // search form
   $("form").on("submit", function (e) {
