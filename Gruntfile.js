@@ -33,6 +33,14 @@ module.exports = function (grunt) {
          src: '*',
          dest: '<%= config.dist %>/css/images/'
        }]
+      },
+      debug: {
+        files: [{
+         expand: true,
+         cwd: '<%= config.app %>/js',
+         src: '*.js',
+         dest: '<%= config.dist %>/js'
+       }]
       }
     },
     uglify: {
@@ -93,7 +101,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'if-missing:curl:jqm',
     'unzip',
-    'copy',
+    'copy:dist',
     'cssmin',
     'uglify'
   ]);
@@ -101,7 +109,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'curl:jqm',
     'unzip',
-    'copy',
+    'copy:dist',
     'cssmin',
     'uglify'
   ]);
@@ -110,6 +118,9 @@ module.exports = function (grunt) {
     'uglify:app'
   ]);
 
-  
+  grunt.registerTask('debug', [
+    'copy:debug'
+  ]);
+
   
 };
