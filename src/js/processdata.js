@@ -1,4 +1,4 @@
-function processSearchData(data) {
+function processData(data) {
 
   var outputData = {}; //initialize array
 
@@ -41,20 +41,15 @@ function processSearchData(data) {
     // extract numeric plant id from url
     plantid = entry.url.split("/").pop(); 
     
-//    console.log(plantid);
+    //remove leading punctuation
+    $.each(entry,function(key,value){
+      entry[key]=entry[key].replace(":  ","");
+      entry[key]=entry[key].replace(": ","");
+    });
     
-    /*//remove leading punctuation TODO
-    for (var x in entry) {
-      entry.x = entry.x.replace(":  ","");
-      entry.x = entry.x.replace(": ","");
-    } 
-    */     
-
     // save entry into outputData array
     outputData[plantid]=entry;
   });
-  
-//  console.log(JSON.stringify(outputData));
   
   return outputData;
 }

@@ -34,8 +34,8 @@ function doSearch (e){
     })
     // runs when $.getJSON() completes 
     .done(function (data) {
-      // process data into nice format
-      mydata = processSearchData(data);
+      // process search data into nice format
+      mydata = processData(data);
       // build html if data exists
       if (mydata) {
         showSearchResults(mydata);
