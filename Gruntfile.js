@@ -81,8 +81,8 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['<%= config.app %>/js/*.js'],
-        tasks: ['copy:debug'],
+        files: ['<%= config.app %>/**/*'],
+        tasks: ['copy:debug','cssmin:combine'],
         options: {
           spawn: false,
         },
