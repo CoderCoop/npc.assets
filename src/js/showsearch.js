@@ -9,7 +9,7 @@ function showSearchResults(mydata) {
     $itemlink = $('<a>').attr({
       "href":"#details-page",
       "class":"search-result",
-      "id":plantid,
+      "id":i,
       "data-transition":"slide"
     }); 
     
