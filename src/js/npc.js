@@ -1,19 +1,10 @@
 
+
 $(document).ready(function () {   
 
   var mydata; // create array to hold result data
 
-  require(["object"]);
-
-
-  require(["dosearch"]);
-  require(["processdata"]);
-  require(["showsearch"]);
-  require(["showresult"]);
-
-  var myobj = new npcsearch() 
-
-
+  var myobj = new npcsearch();
 
   // search form
   $("form").on("submit", function (e) {
@@ -33,6 +24,7 @@ $(document).ready(function () {
 
   // create event handler for click on search results
   $(document).on('click', 'a.search-result', function() {
+    console.log($(this).attr('id'));
     myobj.showResultDetail($(this).attr('id')); //send the clicked link id
   });
 
