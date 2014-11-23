@@ -50,7 +50,6 @@ module.exports = function (grunt) {
       lib: {
         files: [{
           '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
-          '<%= config.dist %>/js/require.js': '<%= bower.directory %>/requirejs/require.js',
           '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
         }]
       },
