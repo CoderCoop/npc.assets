@@ -87,6 +87,7 @@ module.exports = function (grunt) {
         },
       },
     },
+    clean: ["dist/*"]
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -96,6 +97,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-zip');
   grunt.loadNpmTasks('grunt-if-missing');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('default', [
     'if-missing:curl:jqm',
