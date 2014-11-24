@@ -87,7 +87,10 @@ module.exports = function (grunt) {
         },
       },
     },
-    clean: ["dist/*"]
+    clean: ["dist/*"],
+    qunit: {
+      files: ['test/index.html']
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -98,6 +101,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-if-missing');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
 
   grunt.registerTask('default', [
     'if-missing:curl:jqm',
