@@ -40,7 +40,6 @@ npcsearch.prototype.dosearch = function(form) {
   // runs when $.getJSON() completes 
   .done(function (data) {
     // process search data into nice format
-    console.log(JSON.stringify(data));
     
     // handle case of search error
     if (typeof data.query === 'undefined') {
@@ -202,8 +201,6 @@ function processData (data) {
 function showSearchResults (mydata) {
 
   $.each(mydata, function (i, entry) {
-
-    //console.log(JSON.stringify(entry));
 
     //create li
     $listitem = $('<li>'); 

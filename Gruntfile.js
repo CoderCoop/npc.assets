@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     config: config,
     pkg: config.pkg,
-    bower: grunt.file.readJSON('./.bowerrc'),
+//    bower: grunt.file.readJSON('./.bowerrc'),
     copy: {
       dist: {
        files: [{
@@ -32,7 +32,14 @@ module.exports = function (grunt) {
          cwd: '<%= bower.directory %>/jquery-mobile/images',
          src: '*',
          dest: '<%= config.dist %>/css/images/'
-       }]
+       },
+       {
+         expand: true,
+         cwd: 'node_modules/jquery/dist',
+         src: '*.min.*',
+         dest: '<%= config.dist %>/js'
+       }       
+       ]
       },
       debug: {
         files: [{
@@ -49,7 +56,6 @@ module.exports = function (grunt) {
       },
       lib: {
         files: [{
-          '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
           '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
         }]
       },
@@ -127,6 +133,6 @@ module.exports = function (grunt) {
     'copy:debug'
   ]);
   
-  grunt.registerTask('test', 'qunit');
-  
+  grunt.registerTask('test', 'qunit' );
+
 };
