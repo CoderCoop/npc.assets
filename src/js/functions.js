@@ -39,23 +39,16 @@ npcsearch.prototype.dosearch = function(form) {
   })
   // runs when $.getJSON() completes 
   .done(function (data) {
+  
     // process search data into nice format
+    self.mydata = processData(data);
     
-    // handle case of search error
-    if (typeof data.query === 'undefined') {
-      $('#mylist').html("<h3>No results found.</h3>");
-    } 
-    // handle case of 0 results found
-    else if (!data.query.results) {
-      $('#mylist').html("<h3>No results found.</h3>");
-    } 
-    else {
-      self.mydata = processData(data);
-    }
-    
-    // build html if data exists
+    // build html if data exists, otherwise show user error
     if (self.mydata) {
       showSearchResults(self.mydata);
+    }
+    else {
+      $('#mylist').html("<h3>No results found.</h3>");
     }
     // remove loading message
     $.mobile.loading( 'hide');
@@ -154,6 +147,16 @@ npcsearch.prototype.showResultDetail = function (id) {
 function processData (data) {
 
   var outputData = {}; //initialize array
+
+
+  // handle case of search error
+  if (typeof data.query === 'undefined') {
+    return;
+  } 
+  // handle case of 0 results found
+  if (!data.query.results) {
+    return;
+  } 
     
   // handle case of only 1 result returned     
   if (typeof data.query.results.div[0] === 'undefined') {  
