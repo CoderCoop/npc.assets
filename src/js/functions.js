@@ -40,6 +40,7 @@ npcsearch.prototype.dosearch = function(form) {
   // runs when $.getJSON() completes 
   .done(function (data) {
     // process search data into nice format
+    console.log(JSON.stringify(data));
     self.mydata = processData(data);
     // build html if data exists
     if (self.mydata) {
@@ -192,8 +193,6 @@ function processData (data) {
     outputData[plantid]=entry;
   });
 
-//    console.log(JSON.stringify(outputData));
-      
   return outputData;
 }
 
