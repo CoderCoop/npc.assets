@@ -19,8 +19,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~1.11.1",
-    "requirejs": "~2.1.9"
+    "jquery": "~1.11.1"
   }
   
 }

@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     config: config,
     pkg: config.pkg,
-    bower: grunt.file.readJSON('./.bowerrc'),
+//    bower: grunt.file.readJSON('./.bowerrc'),
     copy: {
       dist: {
        files: [{
@@ -23,15 +23,30 @@ module.exports = function (grunt) {
        },
        {
          expand: true,
-         cwd: '<%= bower.directory %>/jquery-mobile',
+         cwd: 'lib/jquery-mobile',
          src: '*.min.css*',
          dest: '<%= config.dist %>/css/'
        },
        {
          expand: true,
-         cwd: '<%= bower.directory %>/jquery-mobile/images',
+         cwd: 'lib/jquery-mobile/images',
          src: '*',
          dest: '<%= config.dist %>/css/images/'
+       },
+       {
+         expand: true,
+         cwd: 'node_modules/jquery/dist',
+         src: '*.min.*',
+         dest: '<%= config.dist %>/js'
+       }       
+       ]
+      },
+      debug: {
+        files: [{
+         expand: true,
+         cwd: '<%= config.app %>/js',
+         src: '*.js',
+         dest: '<%= config.dist %>/js'
        }]
       }
     },
@@ -41,9 +56,7 @@ module.exports = function (grunt) {
       },
       lib: {
         files: [{
-          '<%= config.dist %>/js/jquery.js': '<%= bower.directory %>/jquery/dist/jquery.js',
-          '<%= config.dist %>/js/require.js': '<%= bower.directory %>/requirejs/require.js',
-          '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
+          '<%= config.dist %>/js/jquery.mobile.js': 'lib/jquery-mobile/jquery.mobile-1.4.5.min.js',
         }]
       },
       app: {
@@ -64,22 +77,26 @@ module.exports = function (grunt) {
     },
     curl: {
       jqm: {
-        dest: "<%= bower.directory %>/tmp/jquery.mobile.zip",
+        dest: "lib/tmp/jquery.mobile.zip",
         src: "http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip"
       }
     },
     unzip: {
-      '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/tmp/jquery.mobile.zip'
+      'lib/jquery-mobile/': 'lib/tmp/jquery.mobile.zip'
     },
     watch: {
       scripts: {
-        files: ['<%= config.app %>/js/*.js'],
-        tasks: ['uglify:app'],
+        files: ['<%= config.app %>/**/*'],
+        tasks: ['copy:debug','cssmin:combine'],
         options: {
           spawn: false,
         },
       },
     },
+    clean: ["dist/*"],
+    qunit: {
+      files: ['test/index.html']
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -89,11 +106,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-zip');
   grunt.loadNpmTasks('grunt-if-missing');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
 
   grunt.registerTask('default', [
     'if-missing:curl:jqm',
     'unzip',
-    'copy',
+    'copy:dist',
     'cssmin',
     'uglify'
   ]);
@@ -101,7 +120,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'curl:jqm',
     'unzip',
-    'copy',
+    'copy:dist',
     'cssmin',
     'uglify'
   ]);
@@ -110,6 +129,10 @@ module.exports = function (grunt) {
     'uglify:app'
   ]);
 
+  grunt.registerTask('debug', [
+    'copy:debug'
+  ]);
   
-  
+  grunt.registerTask('test', 'qunit' );
+
 };

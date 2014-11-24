@@ -29,8 +29,10 @@ div.ui-input-search {
 }
 
 .ui-li-has-thumb img {
-  max-height: 128px !important;
-  max-width: 128px !important;
+  max-height: 128px !important; /* override jqm */
+  max-width: 128px !important; /* override jqm */
+  height: 128px !important;
+  width: 128px !important;
   box-shadow: 0 0 5px #808080;
 }
   

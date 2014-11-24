@@ -1,20 +1,14 @@
-
 $(document).ready(function () {   
 
-  var mydata; // create array to hold result data
-
-  require(["dosearch"]);
-  require(["processdata"]);
-  require(["showsearch"]);
-  require(["showresult"]);
+  var myobj = new npcsearch(); // create instance of object
 
   // search form
   $("form").on("submit", function (e) {
-    doSearch.call(this,e); 
+    e.preventDefault(); // suppress form submit
+    myobj.dosearch(this);
   });
 
-
-  // catch click on sample search
+  // event handler for click on sample search
   $(document).on('click', 'a.sample-search', function() {
     // get sample search from text in <a> tag
     var ssearch = $(this).text();
@@ -22,9 +16,10 @@ $(document).ready(function () {
     $("#querya").submit();
   });
 
-  // catch click on search results to show detailed page
+  // event handler for click on search results
   $(document).on('click', 'a.search-result', function() {
-    showResultDetail.call(this,mydata);
-  }); 
-  
+//    console.log($(this).attr('id'));
+    myobj.showResultDetail($(this).attr('id')); //send the clicked link id
+  });
+ 
 }); //close document.ready function
