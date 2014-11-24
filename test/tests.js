@@ -4,15 +4,15 @@ var queryData = {"query":{"count":4,"created":"2014-11-24T02:24:12Z","lang":"en-
 
 var goodProcessedData = {"317":{"url":"http://www.nativeplantcenter.net/?q=plants/317","thumb":"http://www.nativeplantcenter.net/images/plants/herbaceous/thumbs/Pycnanthemum_incanum_RHW.jpg","img":"http://www.nativeplantcenter.net/images/plants/herbaceous/Pycnanthemum_incanum_RHW.jpg","species":"Pycnanthemum incanum","name":"Hoary Mountain Mint","commonNames":"","plantTypes":"Herbaceous","sunExposure":"Shade","soilTexture":"Clay, Loamy, Sandy","soilMoisture":"Dry","region":"Mountain, Piedmont, Coastal Plain"},"318":{"url":"http://www.nativeplantcenter.net/?q=plants/318","thumb":"http://www.nativeplantcenter.net/images/plants/herbaceous/thumbs/Pycnanthemum_tenuifolium_PLANTS_RM89.jpg","img":"http://www.nativeplantcenter.net/images/plants/herbaceous/Pycnanthemum_tenuifolium_PLANTS_RM89.jpg","species":"Pycnanthemum tenuifolium","name":"Narrow-leaved Mountain Mint","commonNames":"","plantTypes":"Herbaceous","sunExposure":"Full Sun, Partial Sun","soilTexture":"Sandy","soilMoisture":"Dry, Moist","region":"Mountain, Piedmont, Coastal Plain"},"697":{"url":"http://www.nativeplantcenter.net/?q=plants/697","thumb":"http://www.nativeplantcenter.net/images/plants/herbaceous/thumbs/Monarda_punctata_RHW.jpg","img":"http://www.nativeplantcenter.net/images/plants/herbaceous/Monarda_punctata_RHW.jpg","species":"Monarda punctata","name":"Horsemint","commonNames":", Spotted Bee-balm","plantTypes":"Herbaceous","sunExposure":"Full Sun","soilTexture":"Loamy, Sandy","soilMoisture":"Dry","region":"Mountain, Piedmont, Coastal Plain"},"1334":{"url":"http://www.nativeplantcenter.net/?q=plants/1334","thumb":"http://www.nativeplantcenter.net/images/plants/herbaceous/thumbs/Monarda_bradburiana_M_fistulosa_RS_MNPS.jpg","img":"http://www.nativeplantcenter.net/images/plants/herbaceous/Monarda_bradburiana_M_fistulosa_RS_MNPS.jpg","species":"Monarda bradburiana (M. fistulosa)","name":"Wild Bergamot","commonNames":", Horsemint","plantTypes":"Herbaceous","sunExposure":"Full Sun, Partial Sun","soilTexture":"Clay, Loamy","soilMoisture":"Dry, Moist","region":"Mountain, Piedmont, Coastal Plain"}};
 
-
+/*
 QUnit.test( "hello test", function( assert ) {
   assert.ok( 1 == "1", "Passed!" );
 });
+*/
 
-
-QUnit.test( "another test", function( assert ) {
+QUnit.test( "a test", function( assert ) {
 //  equal(foo.bar,{}, "Passed!" );
-//  assert.ok(obj.mydata = {}, "Passed!" );
+  assert.ok(obj.mydata = {}, "npcsearch() constructor" );
   assert.deepEqual(processData(queryData), goodProcessedData, "processData()" );
 //  assert.ok(processData(queryData) == processedData, "Passed!" );
 });
