@@ -126,6 +126,7 @@ module.exports = function (grunt) {
   grunt.registerTask('debug', [
     'copy:debug'
   ]);
-
+  
+  grunt.registerTask('test', 'qunit');
   
 };
