@@ -23,13 +23,13 @@ module.exports = function (grunt) {
        },
        {
          expand: true,
-         cwd: '<%= bower.directory %>/jquery-mobile',
+         cwd: 'lib/jquery-mobile',
          src: '*.min.css*',
          dest: '<%= config.dist %>/css/'
        },
        {
          expand: true,
-         cwd: '<%= bower.directory %>/jquery-mobile/images',
+         cwd: 'lib/jquery-mobile/images',
          src: '*',
          dest: '<%= config.dist %>/css/images/'
        },
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
       },
       lib: {
         files: [{
-          '<%= config.dist %>/js/jquery.mobile.js': '<%= bower.directory %>/jquery-mobile/jquery.mobile-1.4.5.min.js',
+          '<%= config.dist %>/js/jquery.mobile.js': 'lib/jquery-mobile/jquery.mobile-1.4.5.min.js',
         }]
       },
       app: {
@@ -77,12 +77,12 @@ module.exports = function (grunt) {
     },
     curl: {
       jqm: {
-        dest: "<%= bower.directory %>/tmp/jquery.mobile.zip",
+        dest: "lib/tmp/jquery.mobile.zip",
         src: "http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip"
       }
     },
     unzip: {
-      '<%= bower.directory %>/jquery-mobile/': '<%= bower.directory %>/tmp/jquery.mobile.zip'
+      'lib/jquery-mobile/': 'lib/tmp/jquery.mobile.zip'
     },
     watch: {
       scripts: {
