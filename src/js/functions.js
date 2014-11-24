@@ -41,7 +41,19 @@ npcsearch.prototype.dosearch = function(form) {
   .done(function (data) {
     // process search data into nice format
     console.log(JSON.stringify(data));
-    self.mydata = processData(data);
+    
+    // handle case of search error
+    if (typeof data.query === 'undefined') {
+      $('#mylist').html("<h3>No results found.</h3>");
+    } 
+    // handle case of 0 results found
+    else if (!data.query.results) {
+      $('#mylist').html("<h3>No results found.</h3>");
+    } 
+    else {
+      self.mydata = processData(data);
+    }
+    
     // build html if data exists
     if (self.mydata) {
       showSearchResults(self.mydata);
@@ -143,18 +155,6 @@ npcsearch.prototype.showResultDetail = function (id) {
 function processData (data) {
 
   var outputData = {}; //initialize array
-
-  // handle case of search error
-  if (typeof data.query === 'undefined') {
-    $('#mylist').html("<h3>No results found.</h3>");
-    return;
-  } 
-
-  // handle case of 0 results found
-  if (!data.query.results) {
-    $('#mylist').html("<h3>No results found.</h3>");
-    return;
-  } 
     
   // handle case of only 1 result returned     
   if (typeof data.query.results.div[0] === 'undefined') {  
