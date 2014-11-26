@@ -3,8 +3,7 @@ $.mobile = require('jquery-mobile');
 
 
 
-
-
+//----------------------------
 
 
 function npcsearch() {
@@ -261,7 +260,7 @@ function showSearchResults (mydata) {
 
 
 
-
+//----------------------------
 
 
 

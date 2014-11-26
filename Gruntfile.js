@@ -96,6 +96,13 @@ module.exports = function (grunt) {
     clean: ["dist/*"],
     qunit: {
       files: ['test/index.html']
+    },
+    browserify: {
+      dist: {
+        files: {
+          'dist/bundle.js': 'src/js/main.js',
+        }
+      }
     }
   });
 
@@ -108,6 +115,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('default', [
     'if-missing:curl:jqm',

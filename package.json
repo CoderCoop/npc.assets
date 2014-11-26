@@ -28,20 +28,28 @@
     "grunt-contrib-qunit": "~0.5.2",
     "qunitjs": "~1.15.0",
     "browserify": "~2.36.1",
-    "browserify-shim": "~3.0.0"
+    "browserify-shim": "~3.0.0",
+    "grunt-browserify": "~3.2.1"
   },
   "dependencies": {
     "jquery": "~1.11.1"
   },
-   "browserify": {
-    "transform": [ "browserify-shim" ]
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
   },
   "browser": {
-    "jquery": "./jquery-1.11.1.min.js",
-    "jquery-mobile": "./jquery.mobile-1.4.5.min.js"
+    "jquery": "./node_modules/jquery/dist/jquery.js",
+    "jquery-mobile": "./lib/jquery-mobile/jquery.mobile-1.4.5.js"
   },
   "browserify-shim": {
     "jquery": "$",
-    "jquery-mobile" : { "exports": "$.mobile", "depends": [ "jquery:$" ] }
-  } 
+    "jquery-mobile": {
+      "exports": "$.mobile",
+      "depends": [
+        "jquery:$"
+      ]
+    }
+  }
 }
