@@ -42,18 +42,18 @@ module.exports = function (grunt) {
         }
       }
     },
-    curl: {
-      jq: { //download jq 1.11.1 compressed minified
-        dest: 'lib/jquery/jquery.min.js',
-        src: 'http://code.jquery.com/jquery-1.11.1.min.js'
+    'curl-dir': {
+      jq: { //download jq 1.11.1 compressed minified + map file
+        src: ['http://code.jquery.com/jquery-1.11.1.min.{js,map}'],
+        dest: 'lib/jquery'
       },
       jqm: { // download jqm 1.4.5 zip file
-        dest: "lib/tmp/jquery.mobile.zip",
-        src: "http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip"
+        src: "http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip",
+        dest: "lib/tmp"
       }
     },
     unzip: { // unzip jqm
-      'lib/jquery-mobile/': 'lib/tmp/jquery.mobile.zip'
+      'lib/jquery-mobile/': 'lib/tmp/jquery.mobile-1.4.5.zip'
     },
     watch: {
       scripts: {
@@ -76,6 +76,12 @@ module.exports = function (grunt) {
         files: {
           'dist/bundle.js': 'src/js/main.js',
         }
+      },
+      debug: {
+        files: {
+          'dist/bundle.js': 'src/js/main.js',
+        },
+        options: { browserifyOptions : {debug: true} }
       }
     }
   });
@@ -92,16 +98,16 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('default', [
-    'if-missing:curl:jqm',
-    'if-missing:curl:jq',
+    'if-missing:curl-dir:jqm',
+    'if-missing:curl-dir:jq',
     'unzip',
     'copy:dist',
     'cssmin',
-    'browserify'
+    'browserify:dist'
   ]);
   
   grunt.registerTask('build', [
-    'curl:jqm',
+    'curl-dir:jqm',
     'unzip',
     'copy:dist',
     'cssmin',
@@ -113,7 +119,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('debug', [
-    'copy:debug'
+    'browserify:debug'
   ]);
   
   grunt.registerTask('test', 'qunit' );
