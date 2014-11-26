@@ -40,8 +40,8 @@
     ]
   },
   "browser": {
-    "jquery": "./node_modules/jquery/dist/jquery.js",
-    "jquery-mobile": "./lib/jquery-mobile/jquery.mobile-1.4.5.js"
+    "jquery": "./lib/jquery/jquery.min.js",
+    "jquery-mobile": "./lib/jquery-mobile/jquery.mobile-1.4.5.min.js"
   },
   "browserify-shim": {
     "jquery": "$",

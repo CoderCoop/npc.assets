@@ -15,85 +15,59 @@ module.exports = function (grunt) {
 //    bower: grunt.file.readJSON('./.bowerrc'),
     copy: {
       dist: {
-       files: [{
+       files: [{ // app html
          expand: true,
          cwd: '<%= config.app %>',
          src: '*.html',
          dest: '<%= config.dist %>'
        },
-       {
+       { // jquery mobile css
          expand: true,
          cwd: 'lib/jquery-mobile',
          src: '*.min.css*',
          dest: '<%= config.dist %>/css/'
        },
-       {
+       { // jquery mobile images
          expand: true,
          cwd: 'lib/jquery-mobile/images',
          src: '*',
          dest: '<%= config.dist %>/css/images/'
-       },
-       {
-         expand: true,
-         cwd: 'node_modules/jquery/dist',
-         src: '*.min.*',
-         dest: '<%= config.dist %>/js'
-       }       
-       ]
-      },
-      debug: {
-        files: [{
-         expand: true,
-         cwd: '<%= config.app %>/js',
-         src: '*.js',
-         dest: '<%= config.dist %>/js'
        }]
-      }
-    },
-    uglify: {
-      options: {
-        banner: '/*! grunt <%= grunt.template.today("yyyy-mm-dd") %> */'
-      },
-      lib: {
-        files: [{
-          '<%= config.dist %>/js/jquery.mobile.js': 'lib/jquery-mobile/jquery.mobile-1.4.5.min.js',
-        }]
-      },
-      app: {
-        files: [{
-          expand: true,
-          src: '*.js',
-          dest: '<%= config.dist %>/js',
-          cwd: '<%= config.app %>/js',
-        }]
       }
     },
     cssmin: {
       combine: {
-        files: {
+        files: { // app css
           '<%= config.dist %>/css/styles.css': ['<%= config.app %>/css/*.css']
         }
       }
     },
     curl: {
-      jqm: {
+      jq: { //download jq 1.11.1 compressed minified
+        dest: 'lib/jquery/jquery.min.js',
+        src: 'http://code.jquery.com/jquery-1.11.1.min.js'
+      },
+      jqm: { // download jqm 1.4.5 zip file
         dest: "lib/tmp/jquery.mobile.zip",
         src: "http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip"
       }
     },
-    unzip: {
+    unzip: { // unzip jqm
       'lib/jquery-mobile/': 'lib/tmp/jquery.mobile.zip'
     },
     watch: {
       scripts: {
         files: ['<%= config.app %>/**/*'],
-        tasks: ['copy:debug','cssmin:combine'],
+        tasks: ['browserify','cssmin:combine'],
         options: {
           spawn: false,
         },
       },
     },
-    clean: ["dist/*"],
+    clean: [
+    "dist/*",
+    "lib"
+    ],
     qunit: {
       files: ['test/index.html']
     },
@@ -119,10 +93,11 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'if-missing:curl:jqm',
+    'if-missing:curl:jq',
     'unzip',
     'copy:dist',
     'cssmin',
-    'uglify'
+    'browserify'
   ]);
   
   grunt.registerTask('build', [
