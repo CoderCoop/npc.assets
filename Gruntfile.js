@@ -33,6 +33,42 @@ module.exports = function (grunt) {
          src: '*',
          dest: '<%= config.dist %>/css/images/'
        }]
+      },
+      app: {
+        files: [
+          { // app js
+            expand: true,
+            cwd: '<%= config.app %>/js',
+            src: '*.js',
+            dest: '<%= config.dist %>/js'
+          },
+          { // app js
+            expand: true,
+            cwd: '<%= config.app %>',
+            src: '*.js',
+            dest: '<%= config.dist %>'
+          }
+        ]
+      },
+      lib: {
+        files: [
+          {
+            src: './lib/jquery/jquery-1.11.1.min.js',
+            dest: '<%= config.dist %>/js/jquery.js'
+          },
+          {
+            src: './lib/require.js',
+            dest: '<%= config.dist %>/js/require.js'
+          },
+          {
+            src: './lib/jquery-mobile/jquery.mobile-1.4.5.min.js',
+            dest: '<%= config.dist %>/js/jquery.mobile.js'
+          },
+          {
+            src: './lib/jquery-mobile/jquery.mobile-1.4.5.min.map',
+            dest: '<%= config.dist %>/js/jquery.mobile-1.4.5.min.map'
+          }          
+        ]
       }
     },
     cssmin: {
@@ -70,19 +106,6 @@ module.exports = function (grunt) {
     ],
     qunit: {
       files: ['test/index.html']
-    },
-    browserify: {
-      dist: {
-        files: {
-          'dist/bundle.js': 'src/js/main.js',
-        }
-      },
-      debug: {
-        files: {
-          'dist/bundle.js': 'src/js/main.js',
-        },
-        options: { browserifyOptions : {debug: true} }
-      }
     }
   });
 
@@ -95,7 +118,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('default', [
     'if-missing:curl-dir:jqm',
