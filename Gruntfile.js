@@ -124,6 +124,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
 
   grunt.registerTask('default', [
+
+  ]);
+  
+  grunt.registerTask('build', [
     'if-missing:curl-dir:jqm',  //TODO curl-dir does not respect if-missing https://github.com/twolfson/grunt-curl/issues/27
     'if-missing:curl-dir:jq',
     'if-missing:curl-dir:rjs',
@@ -132,14 +136,6 @@ module.exports = function (grunt) {
     'copy:lib',
     'copy:app',
     'cssmin'
-  ]);
-  
-  grunt.registerTask('build', [
-    'curl-dir:jqm',
-    'unzip',
-    'copy:dist',
-    'cssmin',
-    'uglify'
   ]);
   
   grunt.registerTask('app', [
