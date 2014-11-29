@@ -57,7 +57,7 @@ module.exports = function (grunt) {
             dest: '<%= config.dist %>/js/jquery.js'
           },
           {
-            src: './lib/require.js',
+            src: './lib/requirejs/require.js',
             dest: '<%= config.dist %>/js/require.js'
           },
           {
@@ -86,6 +86,10 @@ module.exports = function (grunt) {
       jqm: { // download jqm 1.4.5 zip file
         src: "http://jquerymobile.com/resources/download/jquery.mobile-1.4.5.zip",
         dest: "lib/tmp"
+      },
+      rjs: {
+        src: "http://requirejs.org/docs/release/2.1.15/minified/require.js",
+        dest: "lib/requirejs"
       }
     },
     unzip: { // unzip jqm
@@ -100,10 +104,10 @@ module.exports = function (grunt) {
         },
       },
     },
-    clean: [
-    "dist/*",
-    "lib"
-    ],
+    clean: {
+      dist: ["dist/*"],
+      lib: ["lib"]
+    },
     qunit: {
       files: ['test/index.html']
     }
@@ -120,12 +124,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
 
   grunt.registerTask('default', [
-    'if-missing:curl-dir:jqm',
+    'if-missing:curl-dir:jqm',  //TODO curl-dir does not respect if-missing https://github.com/twolfson/grunt-curl/issues/27
     'if-missing:curl-dir:jq',
-    'unzip',
+    'if-missing:curl-dir:rjs',
+    'if-missing:unzip',
     'copy:dist',
-    'cssmin',
-    'browserify:dist'
+    'copy:lib',
+    'copy:app',
+    'cssmin'
   ]);
   
   grunt.registerTask('build', [
