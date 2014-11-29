@@ -1,5 +1,7 @@
 require(["jquery"], function($) {
   require(["jquery.mobile"], function() {
-    require(["npc"]);
+    require(["functions"], function() {
+      require(["npc"]);
+    })
   });
 });
