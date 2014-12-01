@@ -26,6 +26,6 @@
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-qunit": "~0.5.2",
-    "qunitjs": "~1.15.0",
+    "qunitjs": "~1.15.0"
   }
 }
