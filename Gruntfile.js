@@ -13,29 +13,9 @@ module.exports = function (grunt) {
     config: config,
     pkg: config.pkg,
     copy: {
-      dist: {
-       files: [{ // app html
-         expand: true,
-         cwd: '<%= config.app %>',
-         src: '*.html',
-         dest: '<%= config.dist %>'
-       },
-       { // jquery mobile css
-         expand: true,
-         cwd: 'lib/jquery-mobile',
-         src: '*.min.css*',
-         dest: '<%= config.dist %>/css/'
-       },
-       { // jquery mobile images
-         expand: true,
-         cwd: 'lib/jquery-mobile/images',
-         src: '*',
-         dest: '<%= config.dist %>/css/images/'
-       }]
-      },
       app: {
-        files: [
-          { // app js
+        files: 
+          [{ // app js
             expand: true,
             cwd: '<%= config.app %>/js',
             src: '*.js',
@@ -46,28 +26,55 @@ module.exports = function (grunt) {
             cwd: '<%= config.app %>',
             src: '*.js',
             dest: '<%= config.dist %>'
-          }
-        ]
+          },
+          { // app html
+            expand: true,
+            cwd: '<%= config.app %>',
+            src: '*.html',
+            dest: '<%= config.dist %>'
+          }]
+        
       },
       lib: {
-        files: [
-          {
+        files: 
+          [{ // jquery js
             src: './lib/jquery/jquery-1.11.1.min.js',
             dest: '<%= config.dist %>/js/jquery.js'
           },
-          {
+          { // require js
             src: './lib/requirejs/require.js',
             dest: '<%= config.dist %>/js/require.js'
           },
-          {
+          { // jquery mobile js
             src: './lib/jquery-mobile/jquery.mobile-1.4.5.min.js',
             dest: '<%= config.dist %>/js/jquery.mobile.js'
           },
-          {
+          { // jquery mobile map
             src: './lib/jquery-mobile/jquery.mobile-1.4.5.min.map',
             dest: '<%= config.dist %>/js/jquery.mobile-1.4.5.min.map'
-          }          
-        ]
+          },
+          { // jquery mobile css
+            expand: true,
+            cwd: 'lib/jquery-mobile',
+            src: '*.min.css*',
+            dest: '<%= config.dist %>/css/'
+          },
+          { // jquery mobile images
+          expand: true,
+          cwd: 'lib/jquery-mobile/images',
+          src: '*',
+          dest: '<%= config.dist %>/css/images/'
+          }]
+      }
+    },
+    uglify: {
+      app: {
+        files: [{
+          expand: true,
+          src: '*.js',
+          dest: '<%= config.dist %>/js',
+          cwd: '<%= config.app %>/js',
+        }]
       }
     },
     cssmin: {
@@ -97,7 +104,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ['<%= config.app %>/**/*'],
-        tasks: ['browserify','cssmin:combine'],
+        tasks: ['copy:app','cssmin'],
         options: {
           spawn: false,
         },
@@ -137,14 +144,11 @@ module.exports = function (grunt) {
     'cssmin'
   ]);
   
-  grunt.registerTask('app', [
-    'uglify:app'
+  grunt.registerTask('debug', [
+    'copy:app',
+    'cssmin'
   ]);
 
-  grunt.registerTask('debug', [
-    'browserify:debug'
-  ]);
-  
   grunt.registerTask('test', 'qunit' );
 
 };
