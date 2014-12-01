@@ -138,9 +138,7 @@ module.exports = function (grunt) {
     'if-missing:curl-dir:jq',
     'if-missing:curl-dir:rjs',
     'if-missing:unzip',
-    'copy:dist',
-    'copy:lib',
-    'copy:app',
+    'copy',
     'cssmin'
   ]);
   
