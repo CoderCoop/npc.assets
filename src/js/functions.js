@@ -5,16 +5,12 @@ function npcsearch() {
 //start a search using the current form input
 npcsearch.prototype.dosearch = function(form) {
 
-  $.mobile.changePage('#search-results');
-  $('#mylist').empty(); // clear old results from dom
-
   // jqm loading widget
   $.mobile.loading( 'show', {
     text: "Loading...",
     textVisible: true,
     theme: "b",
   });
-  
 
   // sync input between search bars from both jqm pages
   if (form.id == "forma") {
@@ -40,12 +36,15 @@ npcsearch.prototype.dosearch = function(form) {
   // runs when $.getJSON() completes 
   .done(function (data) {
   
+    $('#mylist').empty(); // clear old results from dom
+    $.mobile.changePage('#search-results'); // show search results page
+    
     // process search data into nice format
     self.mydata = processData(data);
     
     // build html if data exists, otherwise show user error
     if (self.mydata) {
-      showSearchResults(self.mydata);
+       showSearchResults(self.mydata);
     }
     else {
       $('#mylist').html("<h3>No results found.</h3>");
