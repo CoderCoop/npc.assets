@@ -12,7 +12,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     config: config,
     pkg: config.pkg,
-//    bower: grunt.file.readJSON('./.bowerrc'),
     copy: {
       dist: {
        files: [{ // app html
