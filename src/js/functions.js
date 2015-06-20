@@ -24,7 +24,7 @@ npcsearch.prototype.dosearch = function(form) {
   
   // build yql & nativeplantcenter query
   var apitemplate = 'http://query.yahooapis.com/v1/public/yql?q=@yqlquery&env=store://datatables.org/alltableswithkeys&callback=?';
-  var yqlquery = encodeURIComponent('select * from html where url="http://www.nativeplantcenter.net/?q=database&count=-1&keyword='+input+'" and xpath=\'//div[contains(@class,"database_entry matrix_entry")]\'');    
+  var yqlquery = encodeURIComponent('select * from html where url="http://www.nativeplantcenter.net/?q=database&count=-1&keyword='+input+'" and xpath=\'//div[contains(@class,"database_entry  matrix_entry")]\'');    
   api = apitemplate.replace("@yqlquery",yqlquery);
 
   var self = this; // keep object in scope
