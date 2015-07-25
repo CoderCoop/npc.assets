@@ -10,8 +10,8 @@
     "type": "git",
     "url": "https://github.com/CoderCoop/npc.assets.git"
   },
-  "author": "Chase Adams",
-  "license": "BSD",
+  "author": "Mike Chelen <michael.chelen@gmail.com> (https://github.com/mchelen/)",
+  "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/CoderCoop/npc.assets"
   },
@@ -32,7 +32,8 @@
     "grunt-browserify": "~3.2.1"
   },
   "dependencies": {
-    "jquery": "~1.11.1"
+    "jquery": "~1.11.1",
+    "nativeplantcenter": "~0.1.9"
   },
   "browserify": {
     "transform": [

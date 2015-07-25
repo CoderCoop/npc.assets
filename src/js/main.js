@@ -60,25 +60,20 @@ function dosearch(form) {
   // handle searches that contain spaces
   input = input.replace(" ","+");
 
-//  var self = this; // keep object in scope
-
-// run yql/npc query
+  // run yql/npc query
   foo.keyword(input,function(result) {
   
 //    console.log("search result: "+JSON.stringify(result,null,"  "));
 
     mydata = result;
-    showSearchResults(result);
     
-    /*
     // build html if data exists, otherwise show user error
-    if (mydata) {
-      showSearchResults(mydata);
-    }
-    else {
+    if (Object.keys(mydata).length == 0) {
       $('#mylist').html("<h3>No results found.</h3>");
     }
-    */
+    else {
+      showSearchResults(mydata);
+    }
     
     // remove loading message
     $.mobile.loading( 'hide'); 
@@ -165,7 +160,7 @@ function showResultDetail(id) {
   
   // entry details plant info
   $('#entry-detail-b').append(
-    $('<div>').html('Common Names: <span>'+mydata[myplant].name+mydata[myplant].commonNames+"</div>"),
+    $('<div>').html('Common Names: <span>'+mydata[myplant].commonNames+"</div>"),
     $('<div>').html('Plant Type: <span>'+mydata[myplant].plantTypes+"</div>"),
     $('<div>').html('Sun Exposure: <span>'+mydata[myplant].sunExposure+"</div>"),
     $('<div>').html('Soil Texture: <span>'+mydata[myplant].soilTexture+"</div>"),
@@ -204,7 +199,7 @@ function showSearchResults (mydata) {
     $('<h3>', {text:entry.species}).appendTo( $itemlink ); 
 
     // create html element with name
-    $('<p>', {text:entry.name+entry.commonNames}).appendTo( $itemlink );
+    $('<p>', {text:entry.name}).appendTo( $itemlink );
 
     // create html element plant type
     $('<p>', {
