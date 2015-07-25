@@ -1,23 +1,20 @@
 var $ = require('jquery');
 $.mobile = require('jquery-mobile');
 
+var npc = require('nativeplantcenter');
+var foo = new npc();
+
+myobj = new npcsearch();
 
 
-
-//----------------------------
-
-
-
-
+var mydata = {};
 
 $(document).ready(function () {   
-
-  var myobj = new npcsearch(); // create instance of object
 
   // search form
   $("form").on("submit", function (e) {
     e.preventDefault(); // suppress form submit
-    myobj.dosearch(this);
+    myobj.dosearch(this);  
   });
 
   // event handler for click on sample search
@@ -34,18 +31,12 @@ $(document).ready(function () {
     myobj.showResultDetail($(this).attr('id')); //send the clicked link id
   });
  
-}); //close document.ready function
+});
 
-
-
-
-
-
-//----------------------------
 
 
 function npcsearch() {
-  this.mydata={};
+  //this.mydata={};
 }
 
 //start a search using the current form input
@@ -71,34 +62,38 @@ npcsearch.prototype.dosearch = function(form) {
   var input = $('#querya').val(); // get input from form (both forms should now be the same)
   // handle searches that contain spaces
   input = input.replace(" ","+");
-  
-  // build yql & nativeplantcenter query
-  var apitemplate = 'http://query.yahooapis.com/v1/public/yql?q=@yqlquery&env=store://datatables.org/alltableswithkeys&callback=?';
-  var yqlquery = encodeURIComponent('select * from html where url="http://www.nativeplantcenter.net/?q=database&count=-1&keyword='+input+'" and xpath=\'//div[contains(@class,"database_entry matrix_entry")]\'');    
-  api = apitemplate.replace("@yqlquery",yqlquery);
 
-  var self = this; // keep object in scope
+//  var self = this; // keep object in scope
 
-  // run yql/npc query
-  $.getJSON(api, {
-    format: "json"
-  })
-  // runs when $.getJSON() completes 
-  .done(function (data) {
+  foo.keyword(input,function(result) {
   
-    // process search data into nice format
-    self.mydata = processData(data);
-    
+//    console.log("search result: "+JSON.stringify(result,null,"  "));
+
+
+    showSearchResults(result);
+
+
+    /*
     // build html if data exists, otherwise show user error
-    if (self.mydata) {
-      showSearchResults(self.mydata);
+    if (mydata) {
+      showSearchResults(mydata);
     }
     else {
       $('#mylist').html("<h3>No results found.</h3>");
     }
+    */
+    
     // remove loading message
     $.mobile.loading( 'hide');
+
+
+   
   });
+
+
+
+  // run yql/npc query
+
 }; 
 
 // show detail of a selected search result
@@ -106,7 +101,7 @@ npcsearch.prototype.dosearch = function(form) {
 npcsearch.prototype.showResultDetail = function (id) {
 
   // use mydata from main object  
-  var mydata = this.mydata;
+//  var mydata = this.mydata;
 
   // get current plant id from <a id="">
   var myplant = id; 
@@ -188,61 +183,6 @@ npcsearch.prototype.showResultDetail = function (id) {
 };
 
 
-
-// process query data and return nicely formatted object
-function processData (data) {
-
-  var outputData = {}; //initialize array
-
-
-  // handle case of search error
-  if (typeof data.query === 'undefined') {
-    return;
-  } 
-  // handle case of 0 results found
-  if (!data.query.results) {
-    return;
-  } 
-    
-  // handle case of only 1 result returned     
-  if (typeof data.query.results.div[0] === 'undefined') {  
-    data.query.results.div = new Array(data.query.results.div);
-  }
-
-  //iterate through each result          
-  $.each(data.query.results.div, function (i, div) {
-    
-    // create object to hold result data
-    // assign values from json
-    var entry = {
-      "url" : div.div[3].div.div[0].a.href, //plant url
-      "thumb" : div.div[0].a.img.src, //thumbnail image
-      "img" : div.div[0].a.img.src.replace("thumbs/",""), //full size image
-      "species" : div.div[1].a.content, //scientific name
-      "name" : div.div[2].p, //common name  
-      "commonNames" : div.div[3].div.div[1].p.content, // all common names
-      "plantTypes" : div.div[3].div.div[2].p, // plant types
-      "sunExposure" : div.div[3].div.div[3].p, // sun exposure
-      "soilTexture" : div.div[3].div.div[4].p, // soil texture
-      "soilMoisture" : div.div[3].div.div[5].p, // soil moisture
-      "region" : div.div[3].div.div[6].p, // region
-    };
-    
-    // extract numeric plant id from url
-    plantid = entry.url.split("/").pop(); 
-    
-    //remove leading punctuation
-    $.each(entry,function(key,value){
-      entry[key]=entry[key].replace(":  ","");
-      entry[key]=entry[key].replace(": ","");
-    });
-    
-    // save entry into outputData array
-    outputData[plantid]=entry;
-  });
-
-  return outputData;
-}
 
 
 // display search results
