@@ -107,11 +107,12 @@ module.exports = function (grunt) {
   ]);
   
   grunt.registerTask('build', [
-    'curl-dir:jqm',
+    'if-missing:curl-dir:jqm',
+    'if-missing:curl-dir:jq',
     'unzip',
     'copy:dist',
     'cssmin',
-    'uglify'
+    'browserify:dist'
   ]);
   
   grunt.registerTask('app', [
