@@ -4,8 +4,7 @@ $.mobile = require('jquery-mobile');
 var npc = require('nativeplantcenter');
 var foo = new npc();
 
-myobj = new npcsearch();
-
+//myobj = new npcsearch();
 
 var mydata = {};
 
@@ -14,7 +13,7 @@ $(document).ready(function () {
   // search form
   $("form").on("submit", function (e) {
     e.preventDefault(); // suppress form submit
-    myobj.dosearch(this);  
+    dosearch(this);  
   });
 
   // event handler for click on sample search
@@ -28,19 +27,17 @@ $(document).ready(function () {
   // event handler for click on search results
   $(document).on('click', 'a.search-result', function() {
 //    console.log($(this).attr('id'));
-    myobj.showResultDetail($(this).attr('id')); //send the clicked link id
+    showResultDetail($(this).attr('id')); //send the clicked link id
   });
  
 });
 
 
 
-function npcsearch() {
-  //this.mydata={};
-}
+
 
 //start a search using the current form input
-npcsearch.prototype.dosearch = function(form) {
+function dosearch(form) {
 
   $.mobile.changePage('#search-results');
   $('#mylist').empty(); // clear old results from dom
@@ -65,14 +62,14 @@ npcsearch.prototype.dosearch = function(form) {
 
 //  var self = this; // keep object in scope
 
+// run yql/npc query
   foo.keyword(input,function(result) {
   
 //    console.log("search result: "+JSON.stringify(result,null,"  "));
 
-
+    mydata = result;
     showSearchResults(result);
-
-
+    
     /*
     // build html if data exists, otherwise show user error
     if (mydata) {
@@ -84,21 +81,17 @@ npcsearch.prototype.dosearch = function(form) {
     */
     
     // remove loading message
-    $.mobile.loading( 'hide');
-
-
-   
+    $.mobile.loading( 'hide'); 
   });
-
-
-
-  // run yql/npc query
 
 }; 
 
+
+
+
 // show detail of a selected search result
 // takes plant id as input
-npcsearch.prototype.showResultDetail = function (id) {
+function showResultDetail(id) {
 
   // use mydata from main object  
 //  var mydata = this.mydata;
@@ -181,6 +174,8 @@ npcsearch.prototype.showResultDetail = function (id) {
     $('<div>').html('<a id="learn-more" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-right ui-icon-arrow-u-r" href="'+mydata[myplant].url+'">Learn More</a>')
   );
 };
+
+
 
 
 
