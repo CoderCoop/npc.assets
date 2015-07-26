@@ -12,5 +12,5 @@ python -m SimpleHTTPServer
 
 
 ```
-aws s3 cp ./gzip s3://chesapeake-native-plants --profile codercoop --expires "$(date  --date='1 month')" --recursive --content-encoding "gzip"
+aws s3 cp ./gzip s3://chesapeake-native-plants --profile codercoop --expires "$(date  --date='1 week')" --recursive --content-encoding "gzip"
 ```
