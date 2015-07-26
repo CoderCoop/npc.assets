@@ -10,6 +10,9 @@ var mydata = {};
 
 $(document).ready(function () {   
 
+  $("#fouc-wrapper").css( "display","block" );
+  $("html").css( "height","" );
+
   // search form
   $("form").on("submit", function (e) {
     e.preventDefault(); // suppress form submit
