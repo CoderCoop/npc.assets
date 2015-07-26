@@ -127,14 +127,6 @@ module.exports = function (grunt) {
     'uglify:dist'
   ]);
   
-  grunt.registerTask('app', [
-    'uglify:app'
-  ]);
-
-  grunt.registerTask('debug', [
-    'browserify:debug'
-  ]);
-  
   grunt.registerTask('test', 'qunit' );
 
 };
