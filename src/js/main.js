@@ -8,11 +8,13 @@ var foo = new npc();
 
 var mydata = {};
 
-$(document).ready(function () {   
+// show our content before jqm is initialized
+$( document ).delegate("#search-page", "pagebeforecreate", function() {
+    $("#fouc-wrapper").css( "display","block" );;
+});
 
-  $("#fouc-wrapper").css( "display","block" );
-  $("html").css( "height","" );
 
+$(document).ready(function () {
   // search form
   $("form").on("submit", function (e) {
     e.preventDefault(); // suppress form submit
