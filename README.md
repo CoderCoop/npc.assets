@@ -12,5 +12,6 @@ python -m SimpleHTTPServer
 
 
 ```
-aws s3 sync . s3://chesapeake-native-plants --profile codercoop
+aws s3 cp ./dist s3://chesapeake-native-plants --profile codercoop --expires "$(date  --date='1 month')" --recursive
+
 ```
