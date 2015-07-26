@@ -35,6 +35,16 @@ module.exports = function (grunt) {
        }]
       }
     },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      dist: {
+        files: {
+          'dist/bundle.js': ['dist/bundle.js']
+        }
+      }
+    },
     cssmin: {
       combine: {
         files: { // app css
@@ -103,7 +113,8 @@ module.exports = function (grunt) {
     'unzip',
     'copy:dist',
     'cssmin',
-    'browserify:dist'
+    'browserify:dist',
+    'uglify:dist'
   ]);
   
   grunt.registerTask('build', [
@@ -112,7 +123,8 @@ module.exports = function (grunt) {
     'unzip',
     'copy:dist',
     'cssmin',
-    'browserify:dist'
+    'browserify:dist',
+    'uglify:dist'
   ]);
   
   grunt.registerTask('app', [
