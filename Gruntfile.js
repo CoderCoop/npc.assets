@@ -18,7 +18,7 @@ module.exports = function (grunt) {
        files: [{ // app html
          expand: true,
          cwd: '<%= config.app %>',
-         src: '*.html',
+         src: ['*.html','*.png'],
          dest: '<%= config.dist %>'
        },
        { // jquery mobile css
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ['<%= config.app %>/**/*'],
-        tasks: ['browserify','cssmin:combine'],
+        tasks: ['copy:dist','cssmin:combine','browserify'],
         options: {
           spawn: false,
         },
