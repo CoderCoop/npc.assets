@@ -2,11 +2,15 @@
 
 ```
 npm install
-bower install
 grunt
 ```
 
 ```
 cd dist
 python -m SimpleHTTPServer
+```
+
+
+```
+aws s3 sync . s3://chesapeake-native-plants --profile codercoop
 ```
