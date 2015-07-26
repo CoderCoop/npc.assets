@@ -78,8 +78,16 @@ module.exports = function (grunt) {
     "dist/*",
     "lib"
     ],
-    qunit: {
-      files: ['test/index.html']
+    compress: {
+      main: {
+        options: {
+          mode: 'gzip'
+        },
+        expand: true,
+        cwd: 'dist/',
+        src: ['**/*'],
+        dest: 'gzip/'
+      }
     },
     browserify: {
       dist: {
@@ -106,6 +114,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   grunt.registerTask('default', [
     'if-missing:curl-dir:jqm',
@@ -114,7 +123,8 @@ module.exports = function (grunt) {
     'copy:dist',
     'cssmin',
     'browserify:dist',
-    'uglify:dist'
+    'uglify:dist',
+    'compress'
   ]);
   
   grunt.registerTask('build', [
@@ -124,7 +134,8 @@ module.exports = function (grunt) {
     'copy:dist',
     'cssmin',
     'browserify:dist',
-    'uglify:dist'
+    'uglify:dist',
+    'compress'
   ]);
   
   grunt.registerTask('test', 'qunit' );
